@@ -1,0 +1,17 @@
+PS D:\IntelligentSystems> cd ..
+PS D:\> cd BigData
+PS D:\BigData> docker run -d --name btsync-client -p 55555/tpc ctlc/btsync AWFSID4WTYSMYBPKZY4RTDESGRDXMYAQ2
+docker: invalid proto: tpc.
+See 'docker run --help'.
+PS D:\BigData> docker run -d --name btsync-client -p 55555/tcp ctlc/btsync AWFSID4WTYSMYBPKZY4RTDESGRDXMYAQ2
+b02a0a9b9ef1246861f83d0a9200a836e60486ea275664ae88f7089eaa563336
+PS D:\BigData> docker logs btsync-client
+Starting btsync with secret: AWFSID4WTYSMYBPKZY4RTDESGRDXMYAQ2
+By using this application, you agree to our Privacy Policy and Terms.
+http://www.bittorrent.com/legal/privacy
+http://www.bittorrent.com/legal/terms-of-use
+
+total physical memory 536870912 max disk cache 2097152
+Using IP address 172.17.0.4
+PS D:\BigData> docker run -it --volumes-from btsync-client ubuntu bash
+root@9a4a391f4cb9:/# 

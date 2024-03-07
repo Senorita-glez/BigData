@@ -1,0 +1,113 @@
+PS D:\IntelligentSystems> D:
+PS D:\IntelligentSystems> cd ..
+PS D:\> cd BigData
+PS D:\BigData> cd .. 
+PS D:\> docker run -v/shared-data --name dc busybox touch /shared-data/testfile.txt
+Unable to find image 'busybox:latest' locally
+latest: Pulling from library/busybox
+9ad63333ebc9: Pull complete
+Digest: sha256:6d9ac9237a84afe1516540f40a0fafdc86859b2141954b4d643af7066d598b74
+Status: Downloaded newer image for busybox:latest
+PS D:\> docker volume list                                                         
+DRIVER    VOLUME NAME
+local     b5cd7cd4b3044d927a264ca357d1e89d689110623ab00dcdbc4d7673e47034bc
+PS D:\> docker volume inspect b5cd7cd4b3044d927a264ca357d1e89d689110623ab00dcdbc4d7673e47034bc
+[
+    {
+        "CreatedAt": "2024-02-16T11:04:22Z",
+        "Driver": "local",
+        "Labels": {
+            "com.docker.volume.anonymous": ""
+        },
+        "Mountpoint": "/var/lib/docker/volumes/b5cd7cd4b3044d927a264ca357d1e89d689110623ab00dcdbc4d7673e47034bc/_data",
+        "Name": "b5cd7cd4b3044d927a264ca357d1e89d689110623ab00dcdbc4d7673e47034bc",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+PS D:\> docker ps -a
+CONTAINER ID   IMAGE                             COMMAND                  CREATED         STATUS                      PORTS                    NAMES       
+d71050a1f1b2   busybox                           "touch /shared-data/…"   2 minutes ago   Exited (0) 2 minutes ago                             dc
+3a2740c3e83e   welcome-to-docker:latest          "docker-entrypoint.s…"   12 days ago     Exited (255) 26 hours ago   0.0.0.0:8090->3000/tcp   upbeat_haslett
+36edd1f8b157   welcome-to-docker:latest          "docker-entrypoint.s…"   12 days ago     Exited (255) 26 hours ago   0.0.0.0:8089->3000/tcp   eager_panini0c5c350e27b9   welcome-to-docker:latest          "docker-entrypoint.s…"   12 days ago     Exited (0) 12 days ago                               practical_agnesi
+2b8569d8779f   docker/welcome-to-docker:latest   "/docker-entrypoint.…"   12 days ago     Exited (0) 12 days ago                               welcome-to-docker
+PS D:\> docker run -it --volumes-from dc busybox /bin/sh
+/ # 
+/ # 
+/ # 
+/ # ls -la
+total 52
+drwxr-xr-x    1 root     root          4096 Feb 16 11:08 .
+drwxr-xr-x    1 root     root          4096 Feb 16 11:08 ..
+-rwxr-xr-x    1 root     root             0 Feb 16 11:08 .dockerenv
+drwxr-xr-x    2 root     root         12288 Jan 17 21:58 bin
+drwxr-xr-x    5 root     root           360 Feb 16 11:08 dev
+drwxr-xr-x    1 root     root          4096 Feb 16 11:08 etc
+drwxr-xr-x    2 nobody   nobody        4096 Jan 17 21:59 home
+drwxr-xr-x    2 root     root          4096 Jan 17 21:58 lib
+lrwxrwxrwx    1 root     root             3 Jan 17 21:58 lib64 -> lib
+dr-xr-xr-x  240 root     root             0 Feb 16 11:08 proc
+drwx------    1 root     root          4096 Feb 16 11:09 root
+drwxr-xr-x    2 root     root          4096 Feb 16 11:04 shared-data
+dr-xr-xr-x   11 root     root             0 Feb 16 11:08 sys
+drwxrwxrwt    2 root     root          4096 Jan 17 21:59 tmp
+drwxr-xr-x    4 root     root          4096 Jan 17 21:59 usr
+drwxr-xr-x    4 root     root          4096 Jan 17 21:59 var
+/ #
+/ # exit
+PS D:\> docker ps -a
+CONTAINER ID   IMAGE                             COMMAND                  CREATED         STATUS                      PORTS                    NAMES
+b64d85ad43d3   busybox                           "/bin/sh"                3 minutes ago   Exited (0) 10 seconds ago                            gifted_leavitt
+d71050a1f1b2   busybox                           "touch /shared-data/…"   7 minutes ago   Exited (0) 7 minutes ago                             dc
+3a2740c3e83e   welcome-to-docker:latest          "docker-entrypoint.s…"   12 days ago     Exited (255) 26 hours ago   0.0.0.0:8090->3000/tcp   upbeat_haslett
+36edd1f8b157   welcome-to-docker:latest          "docker-entrypoint.s…"   12 days ago     Exited (255) 26 hours ago   0.0.0.0:8089->3000/tcp   eager_panini
+0c5c350e27b9   welcome-to-docker:latest          "docker-entrypoint.s…"   12 days ago     Exited (0) 12 days ago                               practical_agnesi
+2b8569d8779f   docker/welcome-to-docker:latest   "/docker-entrypoint.…"   12 days ago     Exited (0) 12 days ago                               welcome-to-docker
+PS D:\> docker run -d -p 8000:8888 -p 55555/tcp --name btsync ctlc/btsync
+Unable to find image 'ctlc/btsync:latest' locally
+latest: Pulling from ctlc/btsync
+[DEPRECATION NOTICE] Docker Image Format v1, and Docker Image manifest version 2, schema 1 support will be removed in an upcoming release. Suggest the author of docker.io/ctlc/btsync:latest to upgrade the image to the OCI Format, or Docker Image manifest v2, schema 2. More information at https://docs.docker.com/go/deprecated-image-specs/
+a3ed95caeb02: Pull complete
+871c32dbbb53: Pull complete
+d8c9fa744675: Pull complete
+5cc70732cf56: Pull complete
+18e39d5999ec: Pull complete
+1775fca35fb6: Pull complete
+2742d2755695: Pull complete
+61909b83ed47: Pull complete
+d48cf0bc1818: Pull complete
+452107d712bb: Pull complete
+9ea4d6d2c9d5: Pull complete
+c946b7f1b754: Pull complete
+7431a62c4392: Pull complete
+d39e14c70e1f: Pull complete
+Digest: sha256:921e4fb8725e144e946b730ac139a75c8f26ad5a85bdd1becfb34a90641f3599
+Status: Downloaded newer image for ctlc/btsync:latest
+34904e64bdaa681f9d89139bcbeb50228d8093380fe6ebf3b8db7790b5a6b278
+PS D:\> docker logs btsync
+Starting btsync with secret: AWFSID4WTYSMYBPKZY4RTDESGRDXMYAQ2
+By using this application, you agree to our Privacy Policy and Terms.
+http://www.bittorrent.com/legal/privacy
+http://www.bittorrent.com/legal/terms-of-use
+
+total physical memory 536870912 max disk cache 2097152
+Using IP address 172.17.0.2
+PS D:\> docker run -it --volumes-from btsync ubuntu /bin/bash
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu
+01007420e9b0: Pull complete
+Digest: sha256:f9d633ff6640178c2d0525017174a688e2c1aef28f0a0130b26bd5554491f0da
+Status: Downloaded newer image for ubuntu:latest
+root@ede1e531e87c:/# cd /data/
+root@ede1e531e87c:/data# ls -la
+total 20
+drwxr-xr-x 3 root root 4096 Feb 16 11:14 .
+drwxr-xr-x 1 root root 4096 Feb 16 11:19 ..
+drwxr-xr-x 2 root root 4096 Feb 16 11:14 .SyncArchive
+-rw-r--r-- 1 root root   20 Feb 16 11:14 .SyncID
+-rw-r--r-- 1 root root  296 Feb 16 11:14 .SyncIgnore
+root@ede1e531e87c:/data# mkdir test-dir
+root@ede1e531e87c:/data# cd test-dir/
+root@ede1e531e87c:/data/test-dir# touch sample-file.txt
+root@ede1e531e87c:/data/test-dir# WORKDIR /opt/tomcat/webapps
+RUN curl -O -L https://tomcat.apache.org/tomcat-7.0-doc/appdev/sample/sample.war

@@ -1,0 +1,6 @@
+version: "3.7"
+services:
+  echo-users:
+    image: bigdataE1/users
+  echo-products:
+    image: bigdataE1/products

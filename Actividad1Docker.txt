@@ -1,0 +1,34 @@
+PS D:\IntelligentSystems> D:
+PS D:\IntelligentSystems> cd..
+PS D:\> cd BigData
+PS D:\BigData> docker images
+REPOSITORY                 TAG       IMAGE ID       CREATED        SIZE
+bigdatainf/my-tomcat       latest    b208cf0e6ad9   26 hours ago   687MB
+senoritaglez/my-tomcat     latest    b208cf0e6ad9   26 hours ago   687MB
+ubuntu                     latest    3db8720ecbf5   3 days ago     77.9MB
+welcome-to-docker          latest    e2fe43ce9e7a   12 days ago    226MB
+busybox                    latest    3f57d9401f8d   4 weeks ago    4.26MB
+docker/welcome-to-docker   latest    c1f619b6477e   3 months ago   18.6MB
+ctlc/btsync                latest    fbc1b2a516ba   9 years ago    362MB
+PS D:\BigData> docker container ls
+CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS          PORTS                                              NAMES
+9a4a391f4cb9   ubuntu        "bash"                   6 minutes ago    Up 6 minutes                                                       naughty_bhabha
+b02a0a9b9ef1   ctlc/btsync   "start-btsync AWFSID…"   11 minutes ago   Up 11 minutes   8888/tcp, 0.0.0.0:37972->55555/tcp                 btsync-client
+ede1e531e87c   ubuntu        "/bin/bash"              15 minutes ago   Up 15 minutes                                                      gracious_chandrasekhar
+34904e64bdaa   ctlc/btsync   "start-btsync"           19 minutes ago   Up 19 minutes   0.0.0.0:8000->8888/tcp, 0.0.0.0:37716->55555/tcp   btsync
+PS D:\BigData> docker run -p 5000:8080 -name example1 bigdatainf/my-tomcat
+unknown shorthand flag: 'n' in -name
+See 'docker run --help'.
+PS D:\BigData> cd tomcat-docker
+PS D:\BigData\tomcat-docker> code Dockerfile
+PS D:\BigData\tomcat-docker> docker build -v bigdatainf/my-tomcat:latest
+unknown shorthand flag: 'v' in -v
+See 'docker buildx build --help'.
+PS D:\BigData\tomcat-docker> docker build -t bigdatainf/my-tomcat:latest
+ERROR: "docker buildx build" requires exactly 1 argument.
+See 'docker buildx build --help'.
+
+Usage:  docker buildx build [OPTIONS] PATH | URL | -
+
+Start a build
+PS D:\BigData\tomcat-docker> 

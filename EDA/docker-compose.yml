@@ -1,0 +1,49 @@
+version: '3.8'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+    - "5672:5672"
+    - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+
+  publisher:
+    image: bigdatainf/python:latest
+    volumes:
+      - ./publisher:/app
+    working_dir: /app
+    command: python publish.py
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_USERNAME=user
+      - RABBITMQ_PASSWORD=password
+    depends_on:
+      - rabbitmq
+
+  consumer1:
+    image: bigdatainf/python:latest
+    volumes:
+      - ./consumer:/app
+    working_dir: /app
+    command: python consume.py
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_USERNAME=user
+      - RABBITMQ_PASSWORD=password
+    depends_on:
+      - rabbitmq
+
+  consumer2:
+    image: bigdatainf/python:latest
+    volumes:
+      - ./consumer:/app
+    working_dir: /app
+    command: python consume.py
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_USERNAME=user
+      - RABBITMQ_PASSWORD=password
+    depends_on:
+      - rabbitmq
